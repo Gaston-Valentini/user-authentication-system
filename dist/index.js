@@ -11,8 +11,8 @@ const startApp = () => {
         .then(() => {
         console.log("Conected to database");
         // Server
-        app_1.default.listen(3000, () => {
-            console.log("ready");
+        app_1.default.listen(app_1.default.get("SERVER_PORT"), () => {
+            console.log(`Server listening on port ${app_1.default.get("SERVER_PORT")}`);
         });
     })
         .catch(error => console.log(error));
