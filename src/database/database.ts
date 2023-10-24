@@ -3,6 +3,7 @@ import { DataSource } from "typeorm"
 import app from "../app/app"
 
 import { User1698141918293 } from "../migrations/1698141918293-user"
+import { User } from "../entity/User"
 
 const database = new DataSource({
     type: "mysql",
@@ -12,7 +13,7 @@ const database = new DataSource({
     password: app.get("DB_PASSWORD"),
     database: app.get("DB_NAME"),
     migrations: [User1698141918293],
-    entities: [],
+    entities: [User],
     synchronize: false,
     logging: false,
 })
