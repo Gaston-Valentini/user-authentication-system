@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node dist/index.js",
     "dev": "nodemon src/index.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "migrate-run": "typeorm-ts-node-commonjs migration:run -d ./src/database/database.ts",
+    "migrate-revert": "typeorm-ts-node-commonjs migration:revert -d ./src/database/database.ts"
   },
   "author": "Gastón Valentini",
   "license": "ISC",
