@@ -4,8 +4,8 @@ const app = express()
 import dotenv from "dotenv"
 dotenv.config()
 
-import authController from "../router/authController"
-import userController from "../router/userController"
+import authController from "../router/authRouter"
+import userController from "../router/userRouter"
 
 // Settings
 app.set("SERVER_PORT", process.env.SERVER_PORT || 4000)
