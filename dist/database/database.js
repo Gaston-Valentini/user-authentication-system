@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
 const typeorm_1 = require("typeorm");
 const app_1 = __importDefault(require("../app/app"));
+const _1698141918293_user_1 = require("../migration/1698141918293-user");
 const database = new typeorm_1.DataSource({
     type: "mysql",
     host: app_1.default.get("DB_HOST"),
@@ -13,6 +14,7 @@ const database = new typeorm_1.DataSource({
     username: app_1.default.get("DB_USERNAME"),
     password: app_1.default.get("DB_PASSWORD"),
     database: app_1.default.get("DB_NAME"),
+    migrations: [_1698141918293_user_1.User1698141918293],
     entities: [],
     synchronize: false,
     logging: false,
