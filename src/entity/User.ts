@@ -16,9 +16,6 @@ export class User extends BaseEntity{
     password!: string
 
     @Column()
-    name!: string
-
-    @Column()
     phone!: number
 
     @Column()
@@ -28,6 +25,9 @@ export class User extends BaseEntity{
     updatedAt!: Date
 
     @Column()
-    enum!: string
+    role!: string
+
+    @Column()
+    isActive!: boolean
 
 }

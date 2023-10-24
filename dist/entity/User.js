@@ -32,10 +32,6 @@ __decorate([
 ], User.prototype, "password", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], User.prototype, "name", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
     __metadata("design:type", Number)
 ], User.prototype, "phone", void 0);
 __decorate([
@@ -49,7 +45,11 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], User.prototype, "enum", void 0);
+], User.prototype, "role", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Boolean)
+], User.prototype, "isActive", void 0);
 exports.User = User = __decorate([
     (0, typeorm_1.Entity)("users")
 ], User);
