@@ -2,7 +2,7 @@ import "reflect-metadata"
 import { DataSource } from "typeorm"
 import app from "../app/app"
 
-import { User1698141918293 } from "../migration/1698141918293-user"
+import { User1698141918293 } from "../migrations/1698141918293-user"
 
 const database = new DataSource({
     type: "mysql",
