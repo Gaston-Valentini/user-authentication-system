@@ -52,5 +52,37 @@ const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.register = register;
 const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { email, password } = req.body;
+        const userFound = yield User_1.User.findOneBy({ email });
+        if (!userFound) {
+            return res.status(200).json({
+                success: true,
+                message: "There is no registered user with that email."
+            });
+        }
+        const comparedPassword = bcrypt_1.default.compareSync(password, userFound.password);
+        if (!comparedPassword) {
+            return res.status(200).json({
+                success: true,
+                message: "Incorrect password."
+            });
+        }
+        return res.status(200).json({
+            success: true,
+            message: "User logged succesfully",
+            user: {
+                nickname: userFound.nickname,
+                email: userFound.email,
+                phone: userFound.phone
+            }
+        });
+    }
+    catch (error) {
+        return res.status(500).json({
+            success: false,
+            error
+        });
+    }
 });
 exports.login = login;

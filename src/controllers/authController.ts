@@ -48,6 +48,45 @@ const register = async (req:Request, res:Response) => {
 
 const login = async (req:Request, res:Response) => {
 
+    try {
+        
+        const { email, password } = req.body
+
+        const userFound = await User.findOneBy({email})
+    
+        if (!userFound) {
+            return res.status(200).json({
+                success: true,
+                message: "There is no registered user with that email."
+            })
+        }
+    
+        const comparedPassword = bcrypt.compareSync(password, userFound.password)
+    
+        if (!comparedPassword) {
+            return res.status(200).json({
+                success: true,
+                message: "Incorrect password."
+            })
+        }
+    
+        return res.status(200).json({
+            success: true,
+            message: "User logged succesfully",
+            user: {
+                nickname: userFound.nickname,
+                email: userFound.email,
+                phone: userFound.phone
+            }
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            error
+        })
+    }
+
 }
 
 export {
