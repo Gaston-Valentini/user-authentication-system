@@ -1,4 +1,5 @@
 import { Request, Response } from "express"
+import bcrypt from "bcrypt"
 
 import { User } from "../entity/User"
 
@@ -17,10 +18,12 @@ const register = async (req:Request, res:Response) => {
             })
         }
 
+        const hashedPassword = bcrypt.hashSync(password, 10)
+
         const userRegistered = await User.create({
             nickname,
             email,
-            password,
+            password: hashedPassword,
             phone
         }).save()
 
@@ -43,8 +46,8 @@ const register = async (req:Request, res:Response) => {
     }
 }
 
-const login = (req:Request, res:Response) => {
-    return res.send("login")
+const login = async (req:Request, res:Response) => {
+
 }
 
 export {
