@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.login = exports.register = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const User_1 = require("../entity/User");
 const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { nickname, email, password, phone } = req.body;
@@ -68,13 +69,21 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 message: "Incorrect password."
             });
         }
+        const token = jsonwebtoken_1.default.sign({
+            id: userFound.id,
+            email: userFound.email,
+            role: userFound.role
+        }, "secret", {
+            expiresIn: "24h"
+        });
         return res.status(200).json({
             success: true,
             message: "User logged succesfully",
             user: {
                 nickname: userFound.nickname,
                 email: userFound.email,
-                phone: userFound.phone
+                phone: userFound.phone,
+                token
             }
         });
     }

@@ -1,5 +1,6 @@
 import { Request, Response } from "express"
 import bcrypt from "bcrypt"
+import jwt from "jsonwebtoken"
 
 import { User } from "../entity/User"
 
@@ -69,6 +70,18 @@ const login = async (req:Request, res:Response) => {
                 message: "Incorrect password."
             })
         }
+        
+        const token = jwt.sign(
+            {
+                id: userFound.id,
+                email: userFound.email,
+                role: userFound.role
+            },
+            "secret",
+            {
+                expiresIn: "24h"
+            }
+        )
     
         return res.status(200).json({
             success: true,
@@ -76,7 +89,8 @@ const login = async (req:Request, res:Response) => {
             user: {
                 nickname: userFound.nickname,
                 email: userFound.email,
-                phone: userFound.phone
+                phone: userFound.phone,
+                token
             }
         })
 
