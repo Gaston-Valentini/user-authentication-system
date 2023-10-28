@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from "express"
 import {TokenDecoded} from "../types/index"
 import jwt from "jsonwebtoken"
 
@@ -9,11 +9,11 @@ const auth = (req:Request, res:Response, next:NextFunction) => {
         if (!req.headers.authorization) {
             return res.status(200).json({
                 success: true,
-                message: "Invalid token"
+                message: "Dont have token"
             })
         }
     
-        const token = req.headers.authorization.split(" ")[1]
+        const token = req.headers.authorization
     
         if (!token) {
             return res.status(200).json({
